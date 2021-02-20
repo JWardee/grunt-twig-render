@@ -212,6 +212,10 @@ module.exports = function(grunt) {
         if(src && !fileData.template) {fileData.template = src;}
         if(src && !fileData.data) {fileData.data = src;}
 
+        if (typeof fileData.orig.dest != 'undefined') {
+          fileData.dest = fileData.orig.dest.replace('./', '');
+        }
+        
         renderer.render(fileData.data, fileData.dataPath, fileData.template, fileData.dest, fileData.flatten);
         grunt.log.writeln('File ' + chalk.cyan(fileData.dest) + ' created.');
       });
